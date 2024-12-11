@@ -1,0 +1,46 @@
+Program:
+    'create song:'
+        statements*=Statement*
+    'end'
+;
+
+Statement:
+    Tempo | Instrument | Note | Chord | Rest | Repeat
+;
+
+Tempo: 
+    'tempo' value=INT
+;
+
+Instrument:
+    'instrument' name=STRING
+;
+
+Note:
+    'note' name=NOTE duration=Duration
+;
+
+Chord:
+    'chord' '{' notes+=NOTE[','] '}' duration=Duration
+;
+
+Rest:
+    'rest' duration=Duration
+;
+
+Repeat: 
+    'repeat' count=INT '{' statements+=Statement* '}'
+;
+
+Duration:
+    'whole' | 'half' | 'quarter' | 'eighth' | 'sixteenth' | 'dotted_half' | 'dotted_quarter'
+;
+
+
+NOTE:
+    /[A-G][#b]?[0-9]/
+;
+
+Comment:
+  /\/\/.*$/
+;
